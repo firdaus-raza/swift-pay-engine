@@ -25,3 +25,6 @@ jobs:
       # We run verify to include the integration tests which use Testcontainers. 
       # GitHub actions ubuntu-latest has Docker pre-installed, so Testcontainers will work perfectly.
       run: mvn clean verify
+
+    - name: Build Docker Images
+      run: docker-compose build

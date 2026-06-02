@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ public class LedgerClient {
      * @throws AccountNotFoundException if the account does not exist (HTTP 404)
      * @throws IllegalStateException if the Ledger Service is down or returning a server error
      */
+    @Cacheable(value = "accounts", key = "#userId")
     public AccountDto getAccount(UUID userId) {
         try {
             return ledgerRestClient.get()
